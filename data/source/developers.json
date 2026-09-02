@@ -1,0 +1,24 @@
+{
+  "_comment": "Скрытая вкладка «Стоп-лист застройщики» исходной Google-таблицы. Разрешение на рекламу застройщиков задаётся парой «город + категория ЖК». Комбинации, которых нет в списке, считаются запрещёнными.",
+  "defaultAllowed": false,
+  "rules": [
+    { "region": "Московская область", "city": "Внуково", "category": "А", "allowed": false },
+    { "region": "Московская область", "city": "Красногорск", "category": "Б", "allowed": false },
+    { "region": "Московская область", "city": "Мисайлово", "category": "Б", "allowed": false },
+    { "region": "Московская область", "city": "Одинцово", "category": "А", "allowed": false },
+    { "region": "Московская область", "city": "Одинцово", "category": "Б", "allowed": true },
+    { "region": "Московская область", "city": "Путилково", "category": "А", "allowed": true },
+    { "region": "Московская область", "city": "Щербинка", "category": "Б", "allowed": true },
+    { "region": "Нижегородская область", "city": "Нижний Новгород", "category": "Б", "allowed": false },
+    { "region": "Оренбургская область", "city": "Оренбург", "category": "А", "allowed": false },
+    { "region": "Оренбургская область", "city": "Оренбург", "category": "Б", "allowed": false },
+    { "region": "Республика Башкортостан", "city": "Нефтекамск", "category": "Б", "allowed": false },
+    { "region": "Республика Башкортостан", "city": "Октябрьский", "category": "Б", "allowed": false },
+    { "region": "Республика Башкортостан", "city": "Стерлитамак", "category": "А", "allowed": false },
+    { "region": "Республика Башкортостан", "city": "Уфа", "category": "А", "allowed": false },
+    { "region": "Республика Башкортостан", "city": "Уфа", "category": "Б", "allowed": false },
+    { "region": "Республика Татарстан", "city": "Казань", "category": "А", "allowed": false },
+    { "region": "Республика Татарстан", "city": "Казань", "category": "Б", "allowed": true },
+    { "region": "Республика Татарстан", "city": "Усады", "category": "Б", "allowed": false }
+  ]
+}
