@@ -55,6 +55,9 @@ export function ComplexMap({ complexes, selection, blocked, format, months, onTo
       if (cancelled || !boxRef.current || mapRef.current) return;
       map = L.map(boxRef.current, { scrollWheelZoom: true, attributionControl: true })
         .setView([55.5, 50], 5);
+      // по умолчанию Leaflet дописывает в подпись свой флаг — оставляем
+      // только обязательную ссылку на источник тайлов
+      map.attributionControl.setPrefix('Leaflet');
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap',
