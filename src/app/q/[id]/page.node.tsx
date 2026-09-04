@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { QuoteView } from '@/components/QuoteView';
-import { dataset, discountGrid } from '@/lib/dataset';
+import { discountGrid } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 import { loadQuote } from '@/lib/quotes';
 import { isManager } from '@/lib/session';
 

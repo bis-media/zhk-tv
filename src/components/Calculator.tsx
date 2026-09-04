@@ -8,7 +8,7 @@ import { SaveQuoteDialog } from './SaveQuoteDialog';
 import { SummaryPanel } from './SummaryPanel';
 import { calculate, developerAllowed } from '@/lib/calc';
 import { complexes as fComplexes, houses as fHouses, money, n, screens as fScreens } from '@/lib/format';
-import { asset } from '@/lib/mode';
+import { DATASET_URL } from '@/lib/mode';
 import { decodeQuote } from '@/lib/quotelink';
 import type { Complex, Dataset, FormatId, QuoteInput, Selection } from '@/lib/types';
 
@@ -72,7 +72,7 @@ export function Calculator({ manager, discountGrid, initial }: Props) {
 
   useEffect(() => {
     let alive = true;
-    fetch(asset('/dataset.json'))
+    fetch(DATASET_URL)
       .then((r) => r.json())
       .then((d: Dataset) => { if (alive) setDataset(d); })
       .catch(() => {});

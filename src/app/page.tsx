@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { dataset } from '@/lib/dataset';
-import { money, n, screens } from '@/lib/format';
+import { liveData as dataset } from '@/lib/live-dataset';
+import { money, n } from '@/lib/format';
 
 export default function HomePage() {
   const { totals, formats, cities } = dataset;
@@ -14,12 +14,7 @@ export default function HomePage() {
         <h1 style={{ marginTop: 10, maxWidth: 820 }}>
           Экраны в холлах и лифтах — реклама там, где человек проходит каждый день
         </h1>
-        <p className="hero__lead">
-          {screens(totals.screens)} в {n(totals.complexes)} жилых комплексах {totals.cities} городов.
-          Соберите медиаплан сами: выберите города и ЖК, посмотрите охват, число контактов и стоимость —
-          без звонка менеджеру и без таблиц в Excel.
-        </p>
-        <div className="hero__actions">
+        <div className="hero__actions" style={{ marginTop: 32 }}>
           <Link href="/calculator" className="btn btn--lg">Собрать медиаплан</Link>
           <Link href="/map" className="btn btn--lg btn--ghost">Показать на карте</Link>
         </div>

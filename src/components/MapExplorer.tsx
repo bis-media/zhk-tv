@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { calculate, developerAllowed } from '@/lib/calc';
 import { complexes as fComplexes, money, n, screens as fScreens } from '@/lib/format';
-import { asset } from '@/lib/mode';
+import { DATASET_URL } from '@/lib/mode';
 import type { Dataset, FormatId, Selection } from '@/lib/types';
 
 const ComplexMap = dynamic(() => import('./ComplexMap').then((m) => m.ComplexMap), {
@@ -36,7 +36,7 @@ export function MapExplorer() {
 
   useEffect(() => {
     let alive = true;
-    fetch(asset('/dataset.json')).then((r) => r.json()).then((d: Dataset) => { if (alive) setDataset(d); }).catch(() => {});
+    fetch(DATASET_URL).then((r) => r.json()).then((d: Dataset) => { if (alive) setDataset(d); }).catch(() => {});
     return () => { alive = false; };
   }, []);
 

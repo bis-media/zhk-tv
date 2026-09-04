@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Header } from '@/components/Header';
 import { ManagerBar } from '@/components/ManagerBar';
-import { dataset } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 import { n } from '@/lib/format';
 import { IS_STATIC } from '@/lib/mode';
 import { isManager } from '@/lib/session';
@@ -43,8 +43,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className="wrap">
             <span>Реклама на экранах в подъездах жилых комплексов</span>
             <span className="spacer" />
-            <Link href="/coverage">Покрытие сети</Link>
-            <Link href="/rules">Правила размещения</Link>
             {!IS_STATIC && <Link href="/manager">Вход для менеджера</Link>}
           </div>
         </div>
@@ -74,6 +72,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="stack gap-6">
               <span>Цены за месяц размещения ({dataset.periodDays} день)</span>
               <span>НДС {Math.round(dataset.vatRate * 100)}%</span>
+              <span>
+                Данные сети обновлены{' '}
+                {new Date(dataset.generatedAt).toLocaleString('ru-RU', {
+                  day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit',
+                })}
+              </span>
             </div>
           </div>
         </footer>

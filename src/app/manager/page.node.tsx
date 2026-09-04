@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ManagerLogin } from '@/components/ManagerLogin';
-import { dataset, discountGrid } from '@/lib/dataset';
+import { discountGrid } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 import { percent } from '@/lib/format';
 import { isManager } from '@/lib/session';
 

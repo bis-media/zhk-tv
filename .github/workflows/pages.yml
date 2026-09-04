@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # статике неоткуда обновляться самой, поэтому пересобираем сайт по расписанию:
+  # каждый день в 04:00 UTC (07:00 МСК) свежие данные из таблицы уезжают на Pages
+  schedule:
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 permissions:
@@ -31,6 +35,12 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      # тянем свежие вкладки из таблицы, чтобы опубликованный сайт
+      # соответствовал тому, что сейчас в медиаплане
+      - name: Refresh data from Google Sheets
+        run: npm run build:data -- --remote
+        continue-on-error: true
 
       - name: Build static site
         run: npm run build:static

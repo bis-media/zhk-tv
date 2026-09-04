@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { QuoteView } from './QuoteView';
-import { asset } from '@/lib/mode';
+import { DATASET_URL } from '@/lib/mode';
 import { decodeQuote } from '@/lib/quotelink';
 import type { Dataset, QuoteInput } from '@/lib/types';
 
@@ -19,7 +19,7 @@ export function QuoteFromLink() {
     const code = new URLSearchParams(window.location.search).get('d');
 
     Promise.all([
-      fetch(asset('/dataset.json')).then((r) => r.json() as Promise<Dataset>),
+      fetch(DATASET_URL).then((r) => r.json() as Promise<Dataset>),
       code ? decodeQuote(code) : Promise.resolve(null),
     ])
       .then(([data, decoded]) => {

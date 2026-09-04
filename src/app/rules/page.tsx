@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { dataset } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 
 export const metadata: Metadata = {
   title: 'Правила размещения — Умные экраны в ЖК',

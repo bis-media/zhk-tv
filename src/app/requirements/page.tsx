@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { dataset } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 import { money } from '@/lib/format';
 
 export const metadata: Metadata = {

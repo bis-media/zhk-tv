@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { MapExplorer } from '@/components/MapExplorer';
-import { dataset } from '@/lib/dataset';
+import { liveData as dataset } from '@/lib/live-dataset';
 import { n } from '@/lib/format';
 
 export const metadata: Metadata = {
