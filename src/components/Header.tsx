@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { ThemeToggle } from './ThemeToggle';
+
 const links = [
   { href: '/calculator', label: 'Медиаплан' },
   { href: '/map', label: 'Карта' },
@@ -41,6 +43,7 @@ export function Header({ manager }: { manager: boolean }) {
               Рассчитать
             </Link>
           )}
+          <ThemeToggle />
         </nav>
       </div>
     </header>

@@ -18,6 +18,8 @@ const roboto = Roboto({
   display: 'swap',
 });
 
+const THEME_SCRIPT = `try{var t=localStorage.getItem('zhk-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
+
 export const metadata: Metadata = {
   title: 'Умные экраны в ЖК — реклама в холлах и лифтах',
   description:
@@ -29,7 +31,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { totals } = dataset;
 
   return (
-    <html lang="ru" className={roboto.variable}>
+    <html lang="ru" className={roboto.variable} suppressHydrationWarning>
+      <head>
+        {/* тема проставляется до первой отрисовки, иначе тёмная страница мигает белым */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         {manager && <ManagerBar />}
 

@@ -110,7 +110,7 @@ export function ComplexMap({ complexes, selection, blocked, format, months, onTo
             <div class="mappopup__row"><span>Контактов</span><b>${n(metrics.ots * months)}</b></div>
             <div class="mappopup__row"><span>Стоимость</span><b>${money(metrics.vat * months)}</b></div>
             ${isBlocked
-              ? '<div class="mappopup__meta" style="margin-top:10px;color:#d1000d">Застройщикам недоступно</div>'
+              ? '<div class="mappopup__meta mappopup__meta--danger" style="margin-top:10px">Застройщикам недоступно</div>'
               : `<button type="button" class="mappopup__btn" data-on="${isSelected}" data-complex="${escapeHtml(complex.id)}">${isSelected ? 'Убрать из плана' : 'Добавить в план'}</button>`}
           </div>`;
 

@@ -38,6 +38,82 @@
   --shadow: 0 4px 45px 4px rgba(40, 39, 75, .07), 0 2px 8px rgba(0, 0, 0, .04);
   --shadow-sm: 0 2px 12px rgba(40, 39, 75, .06);
   --header-h: 64px;
+  --map-tiles: none;
+  color-scheme: light;
+}
+
+/*
+ * Тёмная тема. Пурпур осветлён до #d072c0 — фирменный #951B81 на тёмном фоне
+ * не проходит по контрасту. Жёлтая кнопка действия остаётся фирменной.
+ * Порядок важен: сначала системная настройка, затем явный выбор пользователя.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0f0e13;
+    --surface: #191820;
+    --surface-2: #222029;
+    --ink: #f1eff5;
+    --muted: #a7a2b2;
+    --muted-2: #7c7789;
+    --line: #2f2c39;
+
+    --brand: #d072c0;
+    --brand-dark: #e08fd0;
+    --brand-soft: #2a1f2c;
+
+    --cta: #ffca0e;
+    --cta-hover: #ffd642;
+    --cta-ink: #272727;
+
+    --orange: #e87c0c;
+    --orange-dark: #d97100;
+
+    --danger: #ff8078;
+    --danger-soft: #2f1719;
+    --ok: #4ade9b;
+    --ok-soft: #13291f;
+    --warn: #f0b072;
+    --warn-soft: #2d2116;
+
+    --shadow: 0 4px 45px 4px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .3);
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, .35);
+    --map-tiles: invert(1) hue-rotate(180deg) brightness(.86) contrast(.92) saturate(.75);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f0e13;
+  --surface: #191820;
+  --surface-2: #222029;
+  --ink: #f1eff5;
+  --muted: #a7a2b2;
+  --muted-2: #7c7789;
+  --line: #2f2c39;
+
+  --brand: #d072c0;
+  --brand-dark: #e08fd0;
+  --brand-soft: #2a1f2c;
+
+  --cta: #ffca0e;
+  --cta-hover: #ffd642;
+  --cta-ink: #272727;
+
+  --orange: #e87c0c;
+  --orange-dark: #d97100;
+
+  --danger: #ff8078;
+  --danger-soft: #2f1719;
+  --ok: #4ade9b;
+  --ok-soft: #13291f;
+  --warn: #f0b072;
+  --warn-soft: #2d2116;
+
+  --shadow: 0 4px 45px 4px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .3);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, .35);
+  --map-tiles: invert(1) hue-rotate(180deg) brightness(.86) contrast(.92) saturate(.75);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -93,7 +169,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .logo__mark {
   width: 34px; height: 34px; border-radius: 10px; flex: none;
   background: var(--brand);
-  display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: 700;
+  display: grid; place-items: center; color: var(--surface); font-size: 13px; font-weight: 700;
 }
 .logo__sub { color: var(--muted-2); font-size: 12px; display: block; line-height: 1.1; font-weight: 400; }
 
@@ -132,14 +208,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn--lg { padding: 15px 30px; font-size: 16px; }
 .btn--sm { padding: 8px 14px; font-size: 14px; }
 
-.btn--brand { background: var(--brand); color: #fff; }
+.btn--brand { background: var(--brand); color: var(--surface); }
 .btn--brand:hover { background: var(--brand-dark); }
 
 .btn--ghost { background: transparent; border-color: var(--brand); color: var(--brand); }
 .btn--ghost:hover { background: var(--brand-soft); }
 
 .btn--soft { background: var(--brand-soft); color: var(--brand); }
-.btn--soft:hover { background: #ecd9e8; }
+.btn--soft:hover { background: color-mix(in srgb, var(--brand-soft) 86%, var(--brand)); }
 
 .btn--plain { background: var(--surface); border-color: var(--line); color: var(--ink); }
 .btn--plain:hover { background: var(--surface-2); }
@@ -162,7 +238,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .block-orange a { color: #fff; }
 .block-purple {
   background: var(--brand);
-  color: #fff;
+  color: var(--surface);
   border-radius: var(--radius);
   padding: 28px 30px;
 }
@@ -306,7 +382,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface);
   overflow: hidden;
 }
-.cx[data-on='true'] { border-color: var(--brand); background: #fdfaFC; }
+.cx[data-on='true'] { border-color: var(--brand); background: var(--brand-soft); }
 .cx[data-blocked='true'] { opacity: .55; }
 .cx__row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer; }
 .cx__row:hover { background: var(--surface-2); }
@@ -334,7 +410,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 22px; height: 22px; flex: none; border-radius: 6px; border: 1.5px solid var(--muted-2);
   display: grid; place-items: center; background: var(--surface); color: transparent; font-size: 13px;
 }
-.check[data-on='true'] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.check[data-on='true'] { background: var(--brand); border-color: var(--brand); color: var(--surface); }
 .check[data-on='part'] { border-color: var(--brand); color: var(--brand); }
 
 /* ------------------------------------------------------------- сводка --- */
@@ -380,16 +456,36 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .mappopup { font-family: inherit; min-width: 210px; }
 .mappopup__name { font-weight: 500; font-size: 15px; margin-bottom: 2px; }
-.mappopup__meta { color: #686a6c; font-size: 13px; }
+.mappopup__meta { color: var(--muted); font-size: 13px; }
+.mappopup__meta--danger { color: var(--danger); }
 .mappopup__row { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; padding: 2px 0; }
 .mappopup__btn {
   margin-top: 10px; width: 100%; border: none; cursor: pointer;
-  background: #ffca0e; color: #272727; border-radius: 10px; padding: 9px 12px;
+  background: var(--cta); color: var(--cta-ink); border-radius: 10px; padding: 9px 12px;
   font: inherit; font-size: 14px; font-weight: 500;
 }
-.mappopup__btn[data-on='true'] { background: #f4e8f2; color: #951b81; }
+.mappopup__btn[data-on='true'] { background: var(--brand-soft); color: var(--brand); }
 .leaflet-popup-content { margin: 14px 16px; }
 .leaflet-popup-content-wrapper { border-radius: 14px; }
+
+/* Leaflet рисует свою светлую подложку — подгоняем под тему.
+   Селекторы с .mapbox нужны, чтобы перебить стили самой библиотеки. */
+.mapbox .leaflet-popup-content-wrapper,
+.mapbox .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
+.mapbox .leaflet-container { background: var(--surface-2); }
+.mapbox .leaflet-bar a {
+  background: var(--surface); color: var(--ink); border-bottom-color: var(--line);
+}
+.mapbox .leaflet-bar a:hover { background: var(--surface-2); color: var(--brand); }
+.mapbox .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--muted);
+}
+.mapbox .leaflet-control-attribution a { color: var(--muted); }
+
+/* тайлы OSM только светлые — в тёмной теме инвертируем сам слой,
+   маркеры лежат в другом слое и остаются фирменных цветов */
+.leaflet-tile-pane { filter: var(--map-tiles); }
 
 /* --------------------------------------------------------------- прочее -- */
 
@@ -402,9 +498,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .copyfield { display: flex; gap: 8px; }
 .copyfield .input { font-size: 14px; }
 
-.mgrbar { background: var(--brand); color: #fff; font-size: 14px; padding: 9px 0; }
+.mgrbar { background: var(--brand); color: var(--surface); font-size: 14px; padding: 9px 0; }
 .mgrbar .wrap { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .mgrbar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cta); }
+
+.themetoggle {
+  width: 36px; height: 36px; flex: none; margin-left: 6px;
+  display: grid; place-items: center; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--muted);
+  transition: color .15s, border-color .15s, background .15s;
+}
+.themetoggle:hover { color: var(--brand); border-color: var(--brand); background: var(--brand-soft); }
 
 .switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
 .switch input { accent-color: var(--brand); width: 17px; height: 17px; }
