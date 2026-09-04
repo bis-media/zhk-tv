@@ -386,17 +386,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .cx[data-blocked='true'] { opacity: .55; }
 .cx__row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer; }
 .cx__row:hover { background: var(--surface-2); }
-.cx__photo {
-  width: 68px; height: 50px; flex: none; border-radius: var(--radius-xs);
-  object-fit: cover; background: var(--surface-2); display: block;
-}
-.cx__photo--empty {
-  display: grid; place-items: center;
-  color: var(--muted-2); font-size: 15px; font-weight: 500;
-  border: 1px dashed var(--line);
-}
-@media (max-width: 620px) { .cx__photo { display: none; } }
-
 .cx__main { min-width: 0; flex: 1; }
 .cx__name { font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .cx__meta { font-size: 13px; color: var(--muted); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
@@ -466,10 +455,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .maplegend__dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
 
 .mappopup { font-family: inherit; min-width: 210px; }
-.mappopup__photo {
-  width: 100%; height: 110px; object-fit: cover;
-  border-radius: 10px; margin-bottom: 8px; display: block; background: var(--surface-2);
-}
 .mappopup__name { font-weight: 500; font-size: 15px; margin-bottom: 2px; }
 .mappopup__meta { color: var(--muted); font-size: 13px; }
 .mappopup__meta--danger { color: var(--danger); }

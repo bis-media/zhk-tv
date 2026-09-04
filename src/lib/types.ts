@@ -24,14 +24,12 @@ export interface House {
   video: FormatMetrics;
   banner: FormatMetrics;
   photo: string | null;
-  photoLink: string | null;
   estimated: boolean;
 }
 
 export interface Complex {
   id: string;
   gid: string;
-  photo: string | null;
   name: string;
   region: string;
   city: string;
@@ -97,7 +95,6 @@ export interface Dataset {
     screens: number;
     flats: number;
     residents: number;
-    withPhoto: number;
   };
   formats: Record<FormatId, FormatInfo>;
   vatRate: number;
