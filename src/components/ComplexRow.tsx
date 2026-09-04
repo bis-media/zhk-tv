@@ -53,6 +53,15 @@ function ComplexRowInner({
       >
         <span className="check" data-on={state}>{state === 'part' ? '–' : '✓'}</span>
 
+        {complex.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="cx__photo" src={complex.photo} alt={complex.name} loading="lazy" />
+        ) : (
+          <span className="cx__photo cx__photo--empty" aria-hidden="true">
+            {complex.housing ? complex.housing.slice(0, 1) : '—'}
+          </span>
+        )}
+
         <span className="cx__main">
           <span className="cx__name">
             {complex.name}
@@ -111,6 +120,18 @@ function ComplexRowInner({
                     {h.floors ? ` · ${h.floors} эт.` : ''}
                   </span>
                 </span>
+                {h.photoLink && (
+                  <a
+                    className="house__meta"
+                    href={h.photoLink}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ color: 'var(--brand)' }}
+                  >
+                    фото
+                  </a>
+                )}
                 <span className="house__meta tabular">{n(h.residents)} жит.</span>
                 <span className="house__meta tabular">{n(m.ots * months)} OTS</span>
                 <span className="tabular" style={{ minWidth: 84, textAlign: 'right' }}>{money(m.vat * months)}</span>

@@ -19,8 +19,8 @@
  *   3. Схлопывает дома в ЖК и считает агрегаты для калькулятора.
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
+import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -268,6 +268,36 @@ function imputeOts(field, missingField) {
 imputeOts('videoOts', 'videoOtsMissing');
 imputeOts('bannerOts', 'bannerOtsMissing');
 
+/* -------------------------------------------------------------- фото ----- */
+
+const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
+
+/** Прямая ссылка на картинку (страницу фотохостинга браузер как <img> не покажет). */
+function directImageUrl(value) {
+  const url = clean(value);
+  if (!/^https?:\/\//i.test(url)) return null;
+  const path = url.split('?')[0];
+  return IMAGE_EXT.has(extname(path).toLowerCase()) ? url : null;
+}
+
+/**
+ * Фотографии, залитые вручную: public/photos/<код ЖК>.jpg (например U1.jpg).
+ * Имя файла — код из колонки GID, регистр не важен.
+ */
+function readLocalPhotos() {
+  const dir = join(ROOT, 'public', 'photos');
+  const byGid = new Map();
+  if (!existsSync(dir)) return byGid;
+  for (const file of readdirSync(dir)) {
+    const ext = extname(file).toLowerCase();
+    if (!IMAGE_EXT.has(ext)) continue;
+    byGid.set(file.slice(0, -ext.length).toUpperCase(), `/photos/${file}`);
+  }
+  return byGid;
+}
+
+const localPhotos = readLocalPhotos();
+
 /* ---------------------------------------------------------- итоговый JSON */
 
 const pickOne = (set, fallback = '') => {
@@ -286,15 +316,23 @@ const complexList = [...complexes.values()].map((c) => {
     showsPerDay: h.showsPerDay,
     video: { ots: h.videoOts, noVat: h.videoNoVat, vat: h.videoVat },
     banner: { ots: h.bannerOts, noVat: h.bannerNoVat, vat: h.bannerVat },
-    photo: h.photo,
+    photo: directImageUrl(h.photo),
+    photoLink: clean(h.photo) || null,
     estimated: h.videoOtsMissing || h.bannerOtsMissing,
   }));
 
   const sum = (fn) => houses.reduce((a, h) => a + fn(h), 0);
 
+  // фото ЖК: сначала вручную залитый файл public/photos/<GID>.jpg,
+  // иначе первая прямая ссылка из колонки «Фото» исходной таблицы
+  const photo = localPhotos.get(clean(c.gid).toUpperCase())
+    ?? houses.find((h) => h.photo)?.photo
+    ?? null;
+
   return {
     id: c.key,
     gid: c.gid,
+    photo,
     name: c.name,
     region: c.region,
     city: c.city,
@@ -392,6 +430,7 @@ const totals = {
   screens: complexList.reduce((a, c) => a + c.screens, 0),
   flats: complexList.reduce((a, c) => a + c.flats, 0),
   residents: complexList.reduce((a, c) => a + c.residents, 0),
+  withPhoto: complexList.filter((c) => c.photo).length,
 };
 
 const dataset = {

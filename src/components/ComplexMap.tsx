@@ -100,6 +100,7 @@ export function ComplexMap({ complexes, selection, blocked, format, months, onTo
 
         const html = `
           <div class="mappopup">
+            ${complex.photo ? `<img class="mappopup__photo" src="${escapeHtml(complex.photo)}" alt="" loading="lazy">` : ''}
             <div class="mappopup__name">${escapeHtml(complex.name)}</div>
             <div class="mappopup__meta">${escapeHtml(complex.city)}${complex.district ? ` · ${escapeHtml(complex.district)}` : ''}</div>
             <div class="mappopup__meta">кат. ${escapeHtml(complex.category)}${complex.housing ? ` · ${escapeHtml(complex.housing)}` : ''}</div>
